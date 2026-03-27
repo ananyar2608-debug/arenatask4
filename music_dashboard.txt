@@ -1,0 +1,37 @@
+import time
+from datetime import datetime
+from colorama import Fore, init
+import psutil
+
+init(autoreset=True)
+
+def print_music_dashboard(count, watch_folder, organized_folder, start_time):
+    uptime = round(time.time() - start_time, 2)
+
+    cpu = psutil.cpu_percent()
+    ram = psutil.virtual_memory().percent
+    disk = psutil.disk_usage('/').percent
+
+    print(Fore.CYAN + "\n" + "="*55)
+    print(Fore.GREEN + " MUSIC ORGANIZER DASHBOARD")
+    print(Fore.CYAN + "="*55)
+
+    print(Fore.YELLOW + "\n System Status: " + Fore.GREEN + "ACTIVE")
+    print(Fore.MAGENTA + f" Runtime: {uptime} sec")
+
+    print(Fore.CYAN + "\n System Performance:")
+    print(Fore.WHITE + f"  CPU Usage: {cpu}%")
+    print(Fore.WHITE + f"  RAM Usage: {ram}%")
+    print(Fore.WHITE + f"  Disk Usage: {disk}%")
+
+    print(Fore.CYAN + "\n Directories:")
+    print(Fore.WHITE + f"  Watching: {watch_folder}")
+    print(Fore.WHITE + f"  Destination: {organized_folder}/Music")
+
+    print(Fore.CYAN + "\n File Stats:")
+    print(Fore.GREEN + f"  Music Files Moved: {count}")
+
+    print(Fore.CYAN + "\n Last Updated:")
+    print(Fore.WHITE + datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+    print(Fore.CYAN + "="*55 + "\n")
